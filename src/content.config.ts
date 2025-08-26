@@ -41,9 +41,8 @@ const jobCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     company: z.string(),
-    location: z.string(),
     from: z.number(),
-    to: z.number().or(z.enum(['Now'])),
+    to: z.number().or(z.enum(['Now'])).optional(),
     url: z.string(),
   }),
 });

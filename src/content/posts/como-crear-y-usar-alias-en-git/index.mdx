@@ -1,0 +1,68 @@
+---
+title: Cómo crear y usar los alias en Git
+date: 2024-01-07
+image: ./meta.jpg
+seo:
+  title: Cómo crear y usar los alias en Git
+  description: Cómo configurar atajos personalizados para simplificar comandos más utilizados o complejos
+  type: article
+  keywords: Git Alias, Productividad en Git, Simplificar comandos, Optimizar flujo de trabajo, Atajos en Git, Configuración de alias, Comandos personalizados
+---
+
+Los alias en Git es una forma de crear atajos para tus comandos más utilizados o complejos.
+
+<h2 class="text-xl font-medium mb-4">Cómo crear un alias</h2>
+
+Vamos a crear un alias para el comando **git status**, permitiendo escribir **git s** en lugar de **git status** para obtener el mismos resultado.
+
+
+```bash
+$ git config --global alias.s status
+```
+
+<h2 class="text-xl font-medium mb-4">Cómo usar un alias</h2>
+
+Para poder usar el alias ya creado, solo debemos escribir git seguido del alias.
+
+Al escribir **git s**, se ejecutará el comando **git status**, mostrando el estado actual del repositorio. Por ejemplo:
+
+```bash
+$ git s
+
+On branch main
+Your branch is up to date with 'origin/main.
+
+nothing to commit, working tree clean
+```
+
+
+¡Exacto! Los alias son útiles para simplificar y agilizar el uso de comandos extensos o complejos, haciendo el flujo de trabajo más eficiente.
+
+<h2 class="text-xl font-medium mb-4">Cómo listar los alias</h2>
+
+Para listar todos los alias configurados en GIt, puedes utilizar el siguiente comando en tu terminal
+
+```bash
+$ git config --list --show-origin
+```
+
+<h2 class="text-xl font-medium mb-4">Listado de mis alias</h2>
+
+Te comparto mi listado que uso en mi computadora personal y del trabajo.
+
+```bash
+[alias]
+	br = branch -a
+	a = add .
+	i = init
+	m = commit -m
+	s = status
+	sh = stash
+	shs = stash save
+	shl = stash list
+	shp = stash pop
+	shd = stash drop
+	ps = push origin
+	pl = pull origin
+	l = "log --graph --abbrev-commit --date=relative --all --format=format:'%C(bold blue)%h%C(reset) %C(bold green)(%>(18,trunc)%aD)%C(reset) %C(bold blue)[%<(10,trunc)%aN]%Creset - %s%C(reset) %C(bold yellow)%d%C(reset)'"
+```

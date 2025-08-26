@@ -1,0 +1,106 @@
+---
+title: Cómo convertir un número a formato de moneda en JavaScript
+date: 2022-03-31
+image: ./meta.jpg
+seo:
+  title: Cómo convertir un número a formato de moneda en JavaScript
+  description: El método Intl.NumberFormat() nos permite formatear a un valor más legible.
+  type: article
+  keywords: intl javascript, number format, api internacionalización, formatear precio
+---
+
+Muchas veces he tenido la tarea de convertir un número a un formato de precios. Por ejemplo, si tenemos el precio de un producto como **2300.34** es menos legible que un precio representado como **$2300.34**.
+
+En un principio la idea más rápida de realizarlo es usando el método **.toFixed()**
+y concatenar el valor devuelto al precio. Por ejemplo:
+
+```ts
+const priceNumber = 2300.34
+
+const priceFormat = priceNumber.toFixed(2)
+
+const newPrice = `$ ${priceFormat}` // Devuelve '$ 2300.34'
+
+````
+
+Sin embargo, hoy en día esta tarea es más sencilla gracias a una API nativa en Javascript, la **API Intl.NumberFormat()** nos permite formatear números en un formato específico.
+
+<h2 class="text-xl font-medium mb-4">Entendiendo el API Intl</h2>
+
+```ts
+const priceNormal = 2300.83
+
+const locales = 'en-US'
+
+const options = {
+	style: 'currency',
+	currency: 'USD',
+	minimumFractionDigits: 2,
+	maximumFractionDigits: 2
+}
+
+const formatterDolar = new Intl.NumberFormat(locales, options)
+
+const priceFormatter = formatterDolar.format(priceNormal)
+
+console.log(priceFormatter) // Devuelve '$2,300.83'
+```
+
+El método **Intl.NumberFormat()** recibe dos parámetros de entrada: locales y options.
+
+El primer parámetro **locales** nos permite especificar el idioma y región. Está
+compuesto por la combinación del código de idioma y el código de país separados por
+un guion. Por ejemplo:
+
+
+```ts
+"en-US"; // idioma: inglés | código de país: Estados Unidos
+
+"de-DE"; // idioma: alemán | código de país: Alemania
+
+"ja-JP"; // idioma: japones | código de país: Japon
+```
+
+Puedes encontrar más códigos de idiomas y países en:
+
+* [Listado de idiomas](https://www.w3schools.com/tags/ref_language_codes.asp)
+* [Listado de código de país](https://www.w3schools.com/tags/ref_country_codes.asp)
+
+El segundo parámetro **options** es un objeto con múltiples propiedades, para formatear un número a formato moneda, se requieren 3 propiedades principales:
+
+- **style:** Indica el estilo del formato numérico. Los valores aceptados son decimal, currency y percent.
+- **currency**: Indica el tipo de moneda cuyo símbolo se incluirá en el número formateado, por ejemplo, dólar, euro o yenes.
+- **minimumFractionDigits:** Indica el número mínimo de dígitos que se mostrarán después del punto decimal.
+
+A continuación, te muestro más ejemplos de cómo formatear un precio normal a un precio en dólares, euros y yenes.
+
+```ts
+const priceNormal = 12343.23;
+
+const formatterDolar = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+});
+
+const priceInDolars = formatterDolar.format(priceNormal);
+console.log(priceInDolars); // Devuelve '$12,343.23'
+
+const formatterEuro = new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: 2,
+});
+
+const priceInEuros = formatterEuro.format(priceNormal);
+console.log(priceInEuros); // Devuelve '12.343,23 €'
+
+const formatterYenes = new Intl.NumberFormat("ja-JP", {
+  style: "currency",
+  currency: "JPY",
+  minimumFractionDigits: 2,
+});
+
+const priceInYenes = formatterYenes.format(priceNormal);
+console.log(priceInYenes); // Devuelve '￥12,343.23'
+```

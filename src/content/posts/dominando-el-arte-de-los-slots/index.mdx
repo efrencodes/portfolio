@@ -1,0 +1,117 @@
+---
+title: Maximiza el Poder de Astro Dominando el Arte de los slots
+date: 2023-10-26
+image: ./meta.jpg
+seo:
+  title: Maximiza el Poder de Astro Dominando el Arte de los slots
+  description: Aprende a utilizar estos espacios reservados en tus componentes y potencia tu desarrollo web con Astro.
+  type: article
+  keywords: Implementación de slots, slots de astro en la práctica, ejemplos de slots en proyectos, configuración de slots en astro, personalización de slots en astro
+---
+
+Actualmente estoy migrando mi portafolio a Astro, un nuevo framework para crear sitios estáticos (si otro…), y para ello utilice un concepto llamado slots, a continuación explicaré **¿Qué son los slots?**
+
+Los slots son espacios reservados dentro de un componente dónde se puede insertar contenido HTML.
+
+Veamos un ejemplo de como crearlo y utilizarlo.
+
+<h2 class="text-xl font-medium mb-4">Construyendo nuestro primer slot</h2>
+
+Primero creamos un nuevo archivo de Astro dentro de la carpeta **/src/layouts**  llamado **PrimerSlot.astro**
+
+Astro tiene una etiqueta especial **<slot />**  para indicarle donde queremos colocar el contenido HTML desde otro componente.
+
+```html
+<section>
+
+  <h1>Hola estoy en el componente padre.</h1>
+
+	<slot /> <!-- Aqui mostrará contenido html desde otro componente  -->
+
+<section/>
+```
+
+<h2 class="text-xl font-medium mb-4">Usando nuestro primer slot</h2>
+
+Para utilizar el componente creado, debemos crear un nuevo archivo dentro de la carpeta **/src/pages** llamado **PaginaUtilizandoElPrimerSlot.astro** e importar nuestro componente padre **PrimerSlot** que acabamos de crear.
+
+```html
+---
+import PrimerSlot from "../layouts/PrimerSlot.astro";
+---
+<html lang="es">
+  <head>
+    <title>
+			Página utilizando el primer slot
+		</title>
+  </head>
+  <body>
+    <PrimerSlot />
+			<h1>Hola, aqui mostrare una lista :P </h1>
+	    <ul>
+					<li>Soy una lista</li>
+					<li>usando slots</li>
+			<ul>
+    <PrimerSlot />
+  </body>
+</html>
+```
+
+<h2 class="text-xl font-medium mb-4">Más de un slots (Named Slots)</h2>
+
+Astro también permite utilizar más un **slot**, para ello debemos colocar un nombre a cada slot para poder identificarlos.
+
+Creamos un nuevo archivo de Astro dentro de la carpeta **/src/layouts**  llamado **MultiplesSlots.astro**.
+
+Crearemos un slot para el header y footer usando named slots.
+
+```html
+<div class="container">
+  <header>
+
+    <slot name="header" />
+
+  </header>
+
+  <main>
+
+    <slot></slot>
+
+  </main>
+
+  <footer>
+
+    <slot name="footer" />
+
+  </footer>
+</div>
+```
+
+<h2 class="text-xl font-medium mb-4">Usando componente con múltiples slots</h2>
+
+Debemos crear un nuevo archivo dentro de la carpeta **/src/pages** llamado **PaginaConMultiplesSlots.astro** e importar nuestro componente **MultiplesSlots** que acabamos de crear.
+
+Debemos usar el atributo **slot**  para especificar el nombre del slot. Todos los demas seran insertados en el slot por default.
+
+```html
+---
+import MultiplesSlots from "../layouts/MultiplesSlots.astro";
+---
+<html lang="en">
+  <body>
+    <MultiplesSlots />
+
+			<h1 slot="header">Hola, estoy usando el slot header.</h1>
+
+			<p>Hola, estoy usando el slot por default dentro de main.</p>
+			<p>Hola, yo tambien.</p>
+
+			<p slot="footer">Hola, estoy usando el slot footer.</p>
+
+    <MultiplesSlots />
+  </body>
+</html>
+```
+<h2 class="text-xl font-medium mb-4">Conclusión</h2>
+
+La utilización de los slots nos permite tener componentes padre con una estructura definida y dejar áreas específicas para poder tener variaciones de contenido.
