@@ -35,7 +35,7 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
   },
   seo: {
     title: 'Efrén Martínez - Software engineer',
-    description: 'Software engineer de productos digitales, con experiencia en React, React Native, Vuejs, Next.js, TypeScript, Tailwind CSS, GraphQL.',
+    description: 'Software engineer con experiencia en React, React Native, Vuejs, Next.js, TypeScript, Tailwind CSS, GraphQL.',
     type: 'website',
     image: MetaDefaultImage,
     twitter: {

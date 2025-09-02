@@ -1,0 +1,10 @@
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# *
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.efrencodes.dev/sitemap-index.xml
